@@ -7,6 +7,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetMessagingBottlenecks.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetMessagingBottlenecks.Consumer", "src\DotNetMessagingBottlenecks.Consumer\DotNetMessagingBottlenecks.Consumer.csproj", "{6174DEEC-4474-4271-80AD-C3B91A255F70}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetMessagingBottlenecks.Shared", "src\DotNetMessagingBottlenecks.Shared\DotNetMessagingBottlenecks.Shared.csproj", "{55D60D5A-5C55-4226-8DA5-8379CDA580B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetMessagingBottlenecks.Consumer.Test", "tests\DotNetMessagingBottlenecks.Consumer.Test\DotNetMessagingBottlenecks.Consumer.Test.csproj", "{69197763-7905-4B65-B4F2-E907D6AEF59F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetMessagingBottlenecks.Producer.Test", "tests\DotNetMessagingBottlenecks.Producer.Test\DotNetMessagingBottlenecks.Producer.Test.csproj", "{4BEE50E8-352E-45A8-836D-D6B6A4FC51B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetMessagingBottlenecks.Integration.Test", "tests\DotNetMessagingBottlenecks.Integration.Test\DotNetMessagingBottlenecks.Integration.Test.csproj", "{F2544CE0-D830-411A-9E58-AB45B986D328}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +29,22 @@ Global
 		{6174DEEC-4474-4271-80AD-C3B91A255F70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6174DEEC-4474-4271-80AD-C3B91A255F70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6174DEEC-4474-4271-80AD-C3B91A255F70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55D60D5A-5C55-4226-8DA5-8379CDA580B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55D60D5A-5C55-4226-8DA5-8379CDA580B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55D60D5A-5C55-4226-8DA5-8379CDA580B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55D60D5A-5C55-4226-8DA5-8379CDA580B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69197763-7905-4B65-B4F2-E907D6AEF59F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69197763-7905-4B65-B4F2-E907D6AEF59F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69197763-7905-4B65-B4F2-E907D6AEF59F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69197763-7905-4B65-B4F2-E907D6AEF59F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BEE50E8-352E-45A8-836D-D6B6A4FC51B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BEE50E8-352E-45A8-836D-D6B6A4FC51B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BEE50E8-352E-45A8-836D-D6B6A4FC51B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BEE50E8-352E-45A8-836D-D6B6A4FC51B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2544CE0-D830-411A-9E58-AB45B986D328}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2544CE0-D830-411A-9E58-AB45B986D328}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2544CE0-D830-411A-9E58-AB45B986D328}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2544CE0-D830-411A-9E58-AB45B986D328}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
