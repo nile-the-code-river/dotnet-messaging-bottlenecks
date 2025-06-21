@@ -1,0 +1,6 @@
+@DotNetMessagingBottlenecks.Producer_HostAddress = http://localhost:5215
+
+GET {{DotNetMessagingBottlenecks.Producer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
