@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 
 namespace Baseline.Consumer
 {
-    internal class PingConsumer(ILogger<PingConsumer> _logger) : IConsumer<Ping>
+    // FUCKING needs to be public
+    // If internal, CONSUMER DOES NOT WORK becuase of assembly failing to catch it for 'x.AddConsumers(typeof(Program).Assembly);'
+    public class PingConsumer(ILogger<PingConsumer> _logger) : IConsumer<Ping>
     {
         public Task Consume(ConsumeContext<Ping> context)
         {

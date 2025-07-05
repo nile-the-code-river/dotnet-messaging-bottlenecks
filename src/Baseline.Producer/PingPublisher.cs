@@ -19,7 +19,7 @@ namespace Baseline.Producer
                 var keyPressed = Console.ReadKey(true);
                 if(keyPressed.Key != ConsoleKey.Escape)
                 {
-                    //_logger.LogInformation("Pressed {button}", keyPressed.Key.ToString());
+                    _logger.LogInformation("[Producer] Pressed {button}", keyPressed.Key.ToString());
                     _bus.Publish(new Ping(keyPressed.Key.ToString()));
                 }
 
