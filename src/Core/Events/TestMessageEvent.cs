@@ -9,4 +9,6 @@ namespace Core.Events
     internal class TestMessageEvent
     {
     }
+
+    public record Ping(string button);
 }

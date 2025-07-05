@@ -10,19 +10,19 @@ WORKDIR /app
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["src/Optimized.Producer/Optimized.Producer.csproj", "src/Optimized.Producer/"]
-RUN dotnet restore "./src/Optimized.Producer/Optimized.Producer.csproj"
+COPY ["src/TestProducer/TestProducer.csproj", "src/TestProducer/"]
+RUN dotnet restore "./src/TestProducer/TestProducer.csproj"
 COPY . .
-WORKDIR "/src/src/Optimized.Producer"
-RUN dotnet build "./Optimized.Producer.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/src/TestProducer"
+RUN dotnet build "./TestProducer.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # 이 스테이지는 최종 스테이지에 복사할 서비스 프로젝트를 게시하는 데 사용됩니다.
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Optimized.Producer.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./TestProducer.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # 이 스테이지는 프로덕션에서 사용되거나 VS에서 일반 모드로 실행할 때 사용됩니다(디버그 구성을 사용하지 않는 경우 기본값).
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Optimized.Producer.dll"]
+ENTRYPOINT ["dotnet", "TestProducer.dll"]

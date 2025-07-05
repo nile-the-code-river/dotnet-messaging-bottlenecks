@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "Optimized.Producer": {
+    "TestProducer": {
       "commandName": "Project"
     },
     "Container (Dockerfile)": {
