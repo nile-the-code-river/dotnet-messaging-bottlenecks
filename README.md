@@ -8,3 +8,5 @@
 
 ### Useful Resources
 - [Build Clean Messaging in .NET with MassTransit](https://www.youtube.com/watch?v=4FFYefcx4Bg)
+- [Sample MassTransit Github Repo](https://github.com/hgmauri/sample-masstransit.git)
+
