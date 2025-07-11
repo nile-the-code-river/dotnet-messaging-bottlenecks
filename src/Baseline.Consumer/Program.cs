@@ -1,4 +1,3 @@
-using Baseline.Consumer;
 using MassTransit;
 
 var builder = Host.CreateApplicationBuilder(args);

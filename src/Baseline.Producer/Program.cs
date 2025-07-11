@@ -26,6 +26,7 @@ builder.Services.AddMassTransit(x =>
 });
 
 builder.Services.AddHostedService<PingPublisher>();
+builder.Services.AddHostedService<OrderProducer>();
 
 var app = builder.Build();
 app.Run();
