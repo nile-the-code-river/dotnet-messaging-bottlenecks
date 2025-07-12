@@ -10,3 +10,14 @@
 - [Build Clean Messaging in .NET with MassTransit](https://www.youtube.com/watch?v=4FFYefcx4Bg)
 - [Sample MassTransit Github Repo](https://github.com/hgmauri/sample-masstransit.git)
 
+
+
+### Commands
+**시작**<br/>
+docker-compose up -d
+
+**중지**<br/>
+docker-compose down
+
+**로그 확인**<br/>
+docker logs rabbitmq-dev
