@@ -1,6 +1,8 @@
 ﻿using Core.Models;
 using MassTransit;
+using System.Diagnostics;
 using System.Text.Json;
+using Baseline.Producer;
 
 namespace Baseline.Consumer
 {
@@ -18,6 +20,7 @@ namespace Baseline.Consumer
         {
             var message = context.Message;
             var startTime = DateTime.UtcNow;
+            var processingStopwatch = Stopwatch.StartNew(); // ⭐ 추가
 
             _logger.LogInformation("[Consumer] Processing order {OrderId} with {ItemCount} items",
                 message.OrderId, message.Items.Count);
@@ -44,11 +47,29 @@ namespace Baseline.Consumer
                 // 처리 시간 시뮬레이션
                 await Task.Delay(_random.Next(5, 20));
 
+                processingStopwatch.Stop(); // ⭐ 추가
+
+
+                // ✅ 이걸로 교체
+                if (OrderProducer.IsTrackerActive())
+                {
+                    OrderProducer.NotifyMessageProcessed(processingStopwatch.Elapsed.TotalMilliseconds);
+                    Console.WriteLine($"[DEBUG] Notified producer: {processingStopwatch.Elapsed.TotalMilliseconds:F2}ms");
+                }
+                else
+                {
+                    Console.WriteLine("[DEBUG] Tracker not active - notification skipped");
+                }
+
+                _logger.LogInformation("[Consumer] Completed order {OrderId} in {Duration}ms",
+                    message.OrderId, result.ProcessingDuration.TotalMilliseconds);
+
                 _logger.LogInformation("[Consumer] Completed order {OrderId} in {Duration}ms",
                     message.OrderId, result.ProcessingDuration.TotalMilliseconds);
             }
             catch (Exception ex)
             {
+                processingStopwatch.Stop(); // ⭐ 추가
                 _logger.LogError(ex, "[Consumer] Failed to process order {OrderId}", message.OrderId);
                 throw;
             }

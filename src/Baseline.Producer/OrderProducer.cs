@@ -1,4 +1,5 @@
 ﻿using Core.Models;
+using Core.Monitoring;
 using MassTransit;
 using System.Drawing;
 
@@ -9,6 +10,7 @@ namespace Baseline.Producer
         private readonly ILogger<OrderProducer> _logger;
         private readonly IBus _bus;
         private readonly Random _random = new();
+        private static PerformanceTracker? _tracker;
 
         public OrderProducer(ILogger<OrderProducer> logger, IBus bus)
         {
@@ -44,10 +46,15 @@ namespace Baseline.Producer
 
         private async Task RunStressTest(CancellationToken cancellationToken)
         {
+            _tracker = new PerformanceTracker(); // 측정 시작
             _logger.LogInformation("🔥 STRESS TEST: 1000 msg/sec for 30 seconds");
 
             var endTime = DateTime.UtcNow.AddSeconds(30);
             var messageCount = 0;
+
+            // 주기적 상태 출력을 위한 타이머
+            using var timer = new Timer(_ => _tracker.LogCurrentStats(), null,
+                TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(5));
 
             while (DateTime.UtcNow < endTime && !cancellationToken.IsCancellationRequested)
             {
@@ -66,7 +73,9 @@ namespace Baseline.Producer
                     _logger.LogInformation("📊 Sent {Count} messages", messageCount);
             }
 
-            _logger.LogInformation("✅ Stress test completed. Total: {Count} messages", messageCount);
+            _logger.LogInformation("✅ Stress test completed. Generating final report...");
+            await Task.Delay(5000); // Consumer가 처리할 시간
+            _tracker.LogFinalReport();
         }
 
         private async Task RunNormalLoad(CancellationToken cancellationToken)
@@ -117,7 +126,20 @@ namespace Baseline.Producer
             _logger.LogInformation("✅ High load completed. Total: {Count} messages", messageCount);
         }
 
+        public static void NotifyMessageProcessed(double processingTimeMs)
+        {
+            _tracker?.MessageProcessed(processingTimeMs);
+            Console.WriteLine($"[DEBUG] Message processed notification received: {processingTimeMs:F2}ms");
+
+        }
+
+        // Tracker 상태 확인용 메서드 추가
+        public static bool IsTrackerActive()
+        {
+            return _tracker != null;
+        }
         public enum MessageSize { Small, Medium, Large, XLarge }
+
         private async Task ProduceOrderMessage(MessageSize size = MessageSize.Medium)
         {
             int itemCount = size switch
@@ -137,12 +159,16 @@ namespace Baseline.Producer
                 Items = GenerateOrderItems(itemCount),
                 CustomerInfo = GenerateCustomerInfo(),
                 ShippingAddress = GenerateShippingAddress(),
-                OrderNotes = GenerateOrderNotes() // 크기에 따라 다른 노트
+                OrderNotes = GenerateOrderNotes() // size 파라미터 추가!
             };
 
             orderMessage.TotalAmount = orderMessage.Items.Sum(x => x.Price * x.Quantity);
             await _bus.Publish(orderMessage);
+
+            // 측정 로직
+            _tracker?.MessageSent();
         }
+
         private void LogGCStats()
         {
             var gen0 = GC.CollectionCount(0);
