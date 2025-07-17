@@ -2,10 +2,8 @@ using MassTransit;
 
 var builder = Host.CreateApplicationBuilder(args);
 
-// Configure MassTransit
 builder.Services.AddMassTransit(x =>
 {
-    // Add your consumers
     x.AddConsumers(typeof(Program).Assembly);
 
     x.UsingRabbitMq((context, cfg) =>

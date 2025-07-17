@@ -1,17 +1,11 @@
 ﻿using Baseline.Producer;
 using MassTransit;
 
-var builder = Host.CreateApplicationBuilder(args); // Changed from WebApplication
-
 //var builder = WebApplication.CreateBuilder(args);
+var builder = Host.CreateApplicationBuilder(args);
 
 builder.Services.AddMassTransit(x =>
 {
-    //x.UsingInMemory((context, config) =>
-    //{
-    //    config.ConfigureEndpoints(context);
-    //});
-
     // Configure the bus (example with RabbitMQ)
     x.UsingRabbitMq((context, cfg) =>
     {
@@ -25,7 +19,7 @@ builder.Services.AddMassTransit(x =>
     });
 });
 
-builder.Services.AddHostedService<OrderProducer>();
+builder.Services.AddHostedService<Producer>();
 
 var app = builder.Build();
 app.Run();
