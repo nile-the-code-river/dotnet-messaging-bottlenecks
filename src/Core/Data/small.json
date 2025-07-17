@@ -1,0 +1,50 @@
+[
+  {
+    "Property1": "DUMMY_DATA_01",
+    "Property2": 111.11,
+    "Property3": [
+      {
+        "SubProperty1": "DUMMY_SUB_DATA_01",
+        "SubProperty2": 1
+      },
+      {
+        "SubProperty1": "DUMMY_SUB_DATA_02",
+        "SubProperty2": 2
+      }
+    ],
+    "Property4": [
+      {
+        "SubProperty1": "DUMMY_SUB_DATA_03",
+        "SubProperty2": 3
+      }
+    ]
+  },
+  {
+    "Property1": "DUMMY_DATA_01",
+    "Property2": 111.11,
+    "Property3": [
+      {
+        "SubProperty1": "DUMMY_SUB_DATA_01",
+        "SubProperty2": 1
+      },
+      {
+        "SubProperty1": "DUMMY_SUB_DATA_02",
+        "SubProperty2": 2
+      }
+    ],
+    "Property4": [
+      {
+        "SubProperty1": "DUMMY_SUB_DATA_03",
+        "SubProperty2": 3
+      },
+      {
+        "SubProperty1": "DUMMY_SUB_DATA_03",
+        "SubProperty2": 3
+      },
+      {
+        "SubProperty1": "DUMMY_SUB_DATA_03DUMMY_SUB_D",
+        "SubProperty2": 3
+      }
+    ]
+  }
+]

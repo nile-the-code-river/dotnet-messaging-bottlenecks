@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Utils
 {
-    internal class ResultExporter
+    internal class StopWatch
     {
     }
 }

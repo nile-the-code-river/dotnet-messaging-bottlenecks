@@ -38,6 +38,9 @@ namespace Baseline.Producer
                     case ConsoleKey.H: // High Load  
                         await RunHighLoad(stoppingToken);
                         break;
+                    case ConsoleKey.Q:
+                        await _bus.Publish(ProduceOrderMessage());
+                        break;
                     case ConsoleKey.Escape:
                         return;
                 }

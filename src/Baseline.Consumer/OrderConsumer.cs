@@ -3,6 +3,7 @@ using MassTransit;
 using System.Diagnostics;
 using System.Text.Json;
 using Baseline.Producer;
+using Microsoft.Extensions.Logging;
 
 namespace Baseline.Consumer
 {
@@ -14,6 +15,29 @@ namespace Baseline.Consumer
         public OrderConsumer(ILogger<OrderConsumer> logger)
         {
             _logger = logger;
+
+            try
+            {
+                _logger.LogWarning("=== Starting to load JSON data ===");
+
+                string smMsg = SampleMessage.LoadJsonData(MessageSize.Small);
+                _logger.LogWarning($"Small message loaded - Length: {smMsg.Length}");
+                _logger.LogWarning($"Small message content: {smMsg.Substring(0, Math.Min(200, smMsg.Length))}...");
+
+                string mdMsg = SampleMessage.LoadJsonData(MessageSize.Medium);
+                _logger.LogWarning($"Medium message loaded - Length: {mdMsg.Length}");
+
+                string lgMsg = SampleMessage.LoadJsonData(MessageSize.Large);
+                _logger.LogWarning($"Large message loaded - Length: {lgMsg.Length}");
+
+                _logger.LogWarning("=== JSON data loading completed ===");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to load JSON data");
+                throw;
+            }
+
         }
 
         public async Task Consume(ConsumeContext<OrderMessage> context)
