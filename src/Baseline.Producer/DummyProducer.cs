@@ -3,7 +3,7 @@ using MassTransit;
 
 namespace Baseline.Producer
 {
-    public class Producer(ILogger<Producer> _logger, IBus _bus) : BackgroundService
+    public class DummyProducer(ILogger<DummyProducer> _logger, IBus _bus) : BackgroundService
     {
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
@@ -16,6 +16,7 @@ namespace Baseline.Producer
                 switch (keyPressed.Key)
                 {
                     case ConsoleKey.Escape:
+                        _logger.LogInformation("======== Ended ========");
                         return;
                     default:
                         await _bus.Publish(new DummyMessage() { Value = "Test Message" });
@@ -23,8 +24,6 @@ namespace Baseline.Producer
                         break;
                 }
             }
-
-            _logger.LogInformation("======== Ending ========");
         }
     }
 }

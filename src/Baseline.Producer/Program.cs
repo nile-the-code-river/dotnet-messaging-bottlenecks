@@ -19,7 +19,8 @@ builder.Services.AddMassTransit(x =>
     });
 });
 
-builder.Services.AddHostedService<Producer>();
+//builder.Services.AddHostedService<DummyProducer>();
+builder.Services.AddHostedService<SampleProducer>();
 
 var app = builder.Build();
 app.Run();
